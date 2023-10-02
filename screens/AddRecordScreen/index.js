@@ -4,23 +4,7 @@ import {Text, TextInput, Button, View} from 'react-native';
 import styles from './styles';
 
 const AddRecordScreen = props => {
-  const [carList, setCarList] = useState(
-    {
-      modelName: 'Audi',
-      engineNo: 'KJIFAH123',
-      image: 'https://unsplash.com/photos/Yp9FdEqaCdk',
-    },
-    {
-      modelName: 'Honda',
-      engineNo: 'KJIF45AH123',
-      image: 'https://unsplash.com/photos/zE2VGbJSYns',
-    },
-    {
-      modelName: 'BMW',
-      engineNo: 'HYJIFH127',
-      image: 'https://unsplash.com/photos/94lAQc7ipNg',
-    },
-  );
+  const [carList, setCarList] = useState('');
 
   const [modelName, setModelName] = useState('');
   const [engineNo, setEngineNo] = useState('');
