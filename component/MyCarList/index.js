@@ -1,19 +1,15 @@
 import React from 'react';
-import {Text, Image, View, FlatList} from 'react-native';
+import {Text, Image, View, FlatList, TouchableOpacity} from 'react-native';
 
-const MyCarList = ({carList}) => {
+const MyCarList = ({carList, handlePressItem}) => {
   const renderItem = ({item}) => (
-    <View
-      style={{
-        margin: 10,
-        padding: 10,
-        backgroundColor: '#f0f0f0',
-        borderRadius: 10,
-      }}>
-      <Text>Model Name: {item.modelName}</Text>
-      <Text>Engine No: {item.engineNo}</Text>
-      <Image source={{uri: item.image}} style={{width: 100, height: 100}} />
-    </View>
+    <TouchableOpacity onPress={() => handlePressItem(item)}>
+      <View>
+        <Text>Model Name: {item.modelName}</Text>
+        <Text>Engine No: {item.engineNo}</Text>
+        <Image source={{uri: item.image}} style={{width: 50, height: 50}} />
+      </View>
+    </TouchableOpacity>
   );
 
   return (

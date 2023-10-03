@@ -14,7 +14,7 @@ let carList = [
   {
     modelName: 'Audi',
     engineNo: 'KJIFAH123',
-    image: 'https://unsplash.com/photos/Yp9FdEqaCdk',
+    image: 'https://www.pexels.com/photo/black-audi-coupe-on-brown-road-38637/',
   },
   {
     modelName: 'Honda',
@@ -28,17 +28,35 @@ let carList = [
   },
 ];
 
-const FirstScreen = () => {
+const onItemPress = item => {
+  props.navigation.navigate('detailsScreen', {
+    item,
+  });
+};
+
+const FirstScreen = props => {
   const [myCarList, setMyCarList] = useState({carList});
-  useEffect(() => {}, []);
+  const [modelName, setModelName] = useState(props.route.params?.modelName);
+  const [engineNo, setEngineNo] = useState(props.route.params?.engineNo);
+  const [image, setImage] = useState(props.route.params?.image);
+
+  // useEffect(() => {}, []);
   return (
     <SafeAreaView>
-      <MyCarList carList={carList} />
+      <MyCarList
+        carList={carList}
+        handlePressItem={item => {
+          props.navigation.navigate('detailsScreen', {item});
+        }}
+      />
 
       <TouchableOpacity
         style={styles.buttonStyle}
         onPress={() => {
-          props.navigation.navigate('addRecordScreen');
+          props.navigation.navigate('addRecordScreen', {
+            myCarList,
+            setMyCarList,
+          });
         }}>
         <Text style={{color: 'white'}}>Add a record</Text>
       </TouchableOpacity>

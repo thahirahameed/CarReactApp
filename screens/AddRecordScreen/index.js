@@ -1,22 +1,19 @@
 import React, {useState, useEffect} from 'react';
 import {Text, TextInput, Button, View} from 'react-native';
-
 import styles from './styles';
 
 const AddRecordScreen = props => {
-  const [carList, setCarList] = useState('');
-
+  const {carList, setCarList} = props.route.params;
   const [modelName, setModelName] = useState('');
   const [engineNo, setEngineNo] = useState('');
   const [image, setImage] = useState('');
 
-  useEffect(() => {}, [props.modelName, props.engineNo]);
+  //useEffect(() => {}, [props.modelName, props.engineNo, props.image]);
 
   return (
     <View style={{flex: 1, padding: 20, margin: 10}}>
       <TextInput
         defaultValue="Model Name"
-        value={modelName}
         onChangeText={changedText => {
           setModelName(changedText);
         }}
@@ -25,7 +22,6 @@ const AddRecordScreen = props => {
 
       <TextInput
         defaultValue="Engine Number"
-        value={engineNo}
         onChangeText={changedText => {
           setEngineNo(changedText);
         }}
@@ -34,7 +30,6 @@ const AddRecordScreen = props => {
 
       <TextInput
         defaultValue="Image Url"
-        value={image}
         onChangeText={changedText => {
           setImage(changedText);
         }}
@@ -43,12 +38,16 @@ const AddRecordScreen = props => {
 
       <Button
         onPress={() => {
-          const newCar = {
-            modelName: modelName,
-            engineNo: engineNo,
-            image: image,
-          };
-          setCarList([...carList, newCar]);
+          if (modelName || engineNo || image) {
+            setCarList([
+              ...carList,
+              {
+                modelName: modelName,
+                engineNo: engineNo,
+                image: image,
+              },
+            ]);
+          }
           props.navigation.goBack();
         }}
         style={styles.buttonStyle}

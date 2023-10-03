@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
-  textInputStyle: {
+  textStyle: {
     backgroundColor: 'pink',
     height: 40,
     margin: 10,
