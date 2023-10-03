@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Text,
   SafeAreaView,
@@ -8,8 +8,9 @@ import {
 } from 'react-native';
 
 import styles from './styles';
+import MyCarList from '../../component/MyCarList';
 
-CarList = [
+let carList = [
   {
     modelName: 'Audi',
     engineNo: 'KJIFAH123',
@@ -27,37 +28,20 @@ CarList = [
   },
 ];
 
-const FirstScreen = props => {
+const FirstScreen = () => {
+  const [myCarList, setMyCarList] = useState({carList});
+  useEffect(() => {}, []);
   return (
     <SafeAreaView>
-      <ScrollView>
-        <FlatList
-          data={[CarList]}
-          keyExtractor={(item, index) => item.modelName}
-          renderItem={({item}) => {
-            return (
-              <TouchableOpacity
-                onPress={() => {
-                  props.navigation.navigate('Details Screen', {
-                    modelName: item?.modelName,
-                    engineNo: item?.engineNo,
-                    image: item?.image,
-                  });
-                }}>
-                <Text></Text>
-              </TouchableOpacity>
-            );
-          }}
-        />
+      <MyCarList carList={carList} />
 
-        <TouchableOpacity
-          style={styles.buttonStyle}
-          onPress={() => {
-            props.navigation.navigate('addRecordScreen');
-          }}>
-          <Text>Add a record</Text>
-        </TouchableOpacity>
-      </ScrollView>
+      <TouchableOpacity
+        style={styles.buttonStyle}
+        onPress={() => {
+          props.navigation.navigate('addRecordScreen');
+        }}>
+        <Text style={{color: 'white'}}>Add a record</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
